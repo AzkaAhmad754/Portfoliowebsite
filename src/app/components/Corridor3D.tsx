@@ -12,7 +12,7 @@ const nfrwImg = "/images/nfrw.png";
 const chessImg = "/images/chessgame.png";
 const letsunmaskImg = "/images/letsunmask.png";
 const bloodconnectImg = "/images/bloodconnect.jpeg";
-
+<title>Azka ^-^</title>
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIG
 // ─────────────────────────────────────────────────────────────────────────────
