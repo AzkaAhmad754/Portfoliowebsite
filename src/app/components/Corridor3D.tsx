@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useMotionValue, useSpring, useTransform, motion } from "motion/react";
 import { ModelViewer } from "./ModelViewer";
-import { MobileLayout } from "./MobileLayout";
-import { useWindowSize } from "../hooks/useWindowSize";
 const portfolioImg = "/images/personalportfoliofigma.png";
 const releafImg = "/images/releaf.png";
 const s3cFigmaImg = "/images/s3cfigma.png";
@@ -820,16 +818,10 @@ function EndWall({ sceneZ }: { sceneZ: number }) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function Corridor3D() {
-  const { isMobile } = useWindowSize();
   const scrollYMV = useMotionValue(0);
   const smoothedScroll = useSpring(scrollYMV, { damping: 28, stiffness: 180, mass: 0.8 });
   const [maxScroll, setMaxScroll] = useState(1);
   const [rawSceneZ, setRawSceneZ] = useState(0);
-
-  // Return mobile layout on small screens
-  if (isMobile) {
-    return <MobileLayout />;
-  }
 
   useEffect(() => {
     const update = () => {

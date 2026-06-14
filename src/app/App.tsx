@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { Corridor3D } from "./components/Corridor3D";
 import { CursorSparkle } from "./components/CursorSparkle";
+import { MobileMessage } from "./components/MobileMessage";
 
 export default function App() {
   useEffect(() => {
     // Make body tall so the page is scrollable — drives the 3D camera
-    document.body.style.height = `${PAGES * 100}vh`;
+    document.body.style.height = `${14 * 100}vh`;
     document.body.style.overflowX = "hidden";
 
     const style = document.createElement("style");
@@ -26,9 +27,8 @@ export default function App() {
 
   return (
     <>
-      {/* CSS 3D scroll-driven corridor — fixed, fills viewport */}
+      <MobileMessage />
       <Corridor3D />
-      {/* Sparkle cursor trail — canvas overlay */}
       <CursorSparkle />
     </>
   );
