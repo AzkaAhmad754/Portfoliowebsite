@@ -355,7 +355,6 @@ function DoorSidePanelContent({ config }: { config: DoorConfig }) {
 
   return (
     <div style={{ padding: "14px 14px", overflowY: "auto", height: "100%", boxSizing: "border-box" }}>
-      <p style={{ margin: "0 0 6px", fontSize: 12, color: c, letterSpacing: "0.2em", fontFamily: "'Space Mono',monospace", textTransform: "uppercase" }}>Video Editor</p>
       <p style={{ margin: "0 0 10px", fontSize: 15, color: textColor, fontFamily: "'Abril Fatface',serif", lineHeight: 1.3 }}>{theme.label}</p>
       <ul style={{ margin: 0, padding: "0 0 0 14px" }}>
         {theme.env.map((e, i) => {
@@ -633,7 +632,7 @@ function GardenEnd({ sceneZ }: { sceneZ: number }) {
           borderRadius: "50% 0 50% 0",
           background: ["#f9c8e0", "#d8c8ff", "#ffdde8", "#c8e8ff"][i % 4],
           animation: `float-petal ${4 + i % 3}s ease-in-out infinite`,
-          animationDelay: `${i * 0.4}s`,
+          animationDelay: `${i * 0.7}s`,
           opacity: 0.7,
           pointerEvents: "none",
         }} />
@@ -882,11 +881,11 @@ window.addEventListener("mouseup", onMouseUp);
     top: 24,
     left: "50%",
     transform: "translateX(-50%)",
-    background: "rgba(88,28,135,0.92)",
+    background: "rgba(181, 139, 212, 0.92)",
     color: "#E9D5FF",
     padding: "10px 22px",
     borderRadius: 50,
-    fontSize: 13,
+    fontSize: 11,
     fontFamily: "'Space Mono', monospace",
     letterSpacing: "0.08em",
     zIndex: 9998,
@@ -916,7 +915,7 @@ window.addEventListener("mouseup", onMouseUp);
         position: "fixed",
         inset: 0,
         overflow: "hidden",
-        background: `radial-gradient(ellipse at 50% 45%, #e8d8ff 0%, #D9F2FF 40%, #c8d8ee 100%)`,
+        background: `radial-gradient(ellipse at 50% 45%, #e8d8ff 0%, #b7e0f6 40%, #c8d8ee 100%)`,
         perspective: `${PERSP}px`,
         perspectiveOrigin: "50% 48%",
         willChange: "transform",
