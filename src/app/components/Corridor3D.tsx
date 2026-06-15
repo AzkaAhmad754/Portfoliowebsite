@@ -919,6 +919,8 @@ window.addEventListener("mouseup", onMouseUp);
         background: `radial-gradient(ellipse at 50% 45%, #e8d8ff 0%, #D9F2FF 40%, #c8d8ee 100%)`,
         perspective: `${PERSP}px`,
         perspectiveOrigin: "50% 48%",
+        willChange: "transform",
+        WebkitPerspective: `${PERSP}px`,
       }}>
         {/* 3D Scene — translateZ drives camera movement */}
         <motion.div style={{
