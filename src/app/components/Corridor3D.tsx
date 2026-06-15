@@ -821,8 +821,9 @@ export function Corridor3D() {
   const scrollYMV = useMotionValue(0);
   const smoothedScroll = useSpring(scrollYMV, { damping: 28, stiffness: 180, mass: 0.8 });
   const [maxScroll, setMaxScroll] = useState(1);
-  const [rawSceneZ, setRawSceneZ] = useState(0);
-
+const [rawSceneZ, setRawSceneZ] = useState(0);
+const [showPsst, setShowPsst] = useState(false);
+const pssstTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     const update = () => {
       const total = (PAGES - 1) * window.innerHeight;
@@ -833,6 +834,19 @@ export function Corridor3D() {
 
     const onScroll = () => scrollYMV.set(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
+    let mouseDown = false;
+const onMouseDown = () => { mouseDown = true; };
+const onMouseMove = () => {
+  if (mouseDown && avatarOpacity > 0) {
+    setShowPsst(true);
+    if (pssstTimer.current) clearTimeout(pssstTimer.current);
+    pssstTimer.current = setTimeout(() => setShowPsst(false), 2000);
+  }
+};
+const onMouseUp = () => { mouseDown = false; };
+window.addEventListener("mousedown", onMouseDown);
+window.addEventListener("mousemove", onMouseMove);
+window.addEventListener("mouseup", onMouseUp);
     return () => {
       window.removeEventListener("resize", update);
       window.removeEventListener("scroll", onScroll);
@@ -861,6 +875,30 @@ export function Corridor3D() {
 
   return (
     <>
+    {/* PSST POPUP */}
+{showPsst && (
+  <div style={{
+    position: "fixed",
+    top: 24,
+    left: "50%",
+    transform: "translateX(-50%)",
+    background: "rgba(88,28,135,0.92)",
+    color: "#E9D5FF",
+    padding: "10px 22px",
+    borderRadius: 50,
+    fontSize: 13,
+    fontFamily: "'Space Mono', monospace",
+    letterSpacing: "0.08em",
+    zIndex: 9998,
+    pointerEvents: "none",
+    boxShadow: "0 4px 24px rgba(168,85,247,0.4)",
+    border: "1px solid rgba(192,132,252,0.4)",
+    whiteSpace: "nowrap",
+    animation: "fadeInOut 0.3s ease",
+  }}>
+    pstt... I see what you are doing there 👀
+  </div>
+)}
       {/* Inject keyframes */}
       <style>{`
         @keyframes float-petal {
@@ -1050,6 +1088,11 @@ export function Corridor3D() {
               oscillate={true}
               oscillationSpeed={0.35}
               oscillationAmplitude={0.40}
+              onInteract={() => {
+                setShowPsst(true);
+                if (pssstTimer.current) clearTimeout(pssstTimer.current);
+                pssstTimer.current = setTimeout(() => setShowPsst(false), 2000);
+              }}
             />
           </div>
 
