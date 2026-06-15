@@ -1,20 +1,30 @@
 import { useState, useEffect } from "react";
 
 export function MobileMessage() {
-  const [isSmall, setIsSmall] = useState(false);
+  const [isSmall, setIsSmall] = useState(() => window.innerWidth < 1024);
 
   useEffect(() => {
     const checkSize = () => {
-      setIsSmall(window.innerWidth < 768);
+      setIsSmall(window.innerWidth < 1024);
     };
+
+    // Check immediately and repeatedly for first 2 seconds
     checkSize();
+    const t1 = setTimeout(checkSize, 100);
+    const t2 = setTimeout(checkSize, 500);
+    const t3 = setTimeout(checkSize, 1000);
+
     window.addEventListener("resize", checkSize);
-    return () => window.removeEventListener("resize", checkSize);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      window.removeEventListener("resize", checkSize);
+    };
   }, []);
 
   useEffect(() => {
     if (isSmall) {
-      // Lock everything — no scroll, no zoom, no touch
       document.body.style.overflow = "hidden";
       document.body.style.position = "fixed";
       document.body.style.width = "100%";
@@ -52,6 +62,7 @@ export function MobileMessage() {
       touchAction: "none",
       userSelect: "none",
       overflow: "hidden",
+      WebkitOverflowScrolling: "touch" as any,
     }}>
       <div style={{ textAlign: "center", padding: "20px" }}>
         <div style={{ fontSize: "80px", marginBottom: "24px" }}>💻</div>
